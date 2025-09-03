@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct CalendarHeading: View {
     
     @EnvironmentObject var dateService: DateService

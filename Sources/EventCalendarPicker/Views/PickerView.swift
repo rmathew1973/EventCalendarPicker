@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct PickerView: View {
     @EnvironmentObject var dateService: DateService
     

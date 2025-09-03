@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 17.0, *)
-struct EventCalendarPicker: View {
+struct EventCalendarControl: View {
     @StateObject var dateService: DateService
     @Binding var selectedDate: Date
     

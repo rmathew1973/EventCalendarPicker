@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct DayLabelHeading: View {
     @EnvironmentObject var dateService: DateService
     var body: some View {

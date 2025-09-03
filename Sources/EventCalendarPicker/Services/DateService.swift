@@ -9,7 +9,6 @@ import Combine
 import Foundation
 import SwiftUICore
 
-@available(iOS 13.0, *)
 class DateService: ObservableObject {
     @Published var firstDateOfMonth: Date
     @Published var month: Month {

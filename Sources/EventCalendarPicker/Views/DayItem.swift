@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct DayItem: View {
     @EnvironmentObject var dateService: DateService
     let day: Day
