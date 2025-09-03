@@ -55,32 +55,3 @@ struct EventCalendarPicker: View {
         }
     }
 }
-
-@available(iOS 17.0, *)
-struct ContentView: View {
-    let currentDate: Date
-    let calendar: Calendar
-    let dates: [Date]
-    
-    init() {
-        currentDate = Date()
-        calendar = Calendar.current
-        dates = [currentDate, Calendar.current.date(byAdding: .day, value: 2, to: Date())!, Calendar.current.date(byAdding: .day, value: 5, to: Date())!, Calendar.current.date(byAdding: .day, value: 10, to: Date())!, Calendar.current.date(byAdding: .day, value: 15, to: Date())!, Calendar.current.date(byAdding: .year, value: 1, to: Date())!, Calendar.current.date(byAdding: .year, value: 2, to: Date())!, Calendar.current.date(byAdding: .year, value: 3, to: Date())!, Calendar.current.date(byAdding: .year, value: 4, to: Date())!]
-    }
-    
-    var body: some View {
-        VStack {
-            Spacer()
-            EventCalendarPicker(selectedDate: .constant(currentDate), dates: dates) { _ in
-                
-            }
-            .padding(32)
-            Spacer()
-        }
-    }
-}
-
-@available(iOS 17.0, *)
-#Preview {
-    ContentView()
-}
