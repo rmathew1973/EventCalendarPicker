@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @available(iOS 17.0, *)
-struct EventCalendarControl: View {
+struct EventCalendarPicker: View {
     @StateObject var dateService: DateService
     @Binding var selectedDate: Date
     
@@ -71,7 +71,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Spacer()
-            EventCalendarControl(selectedDate: .constant(currentDate), dates: dates) { _ in
+            EventCalendarPicker(selectedDate: .constant(currentDate), dates: dates) { _ in
                 
             }
             .padding(32)
