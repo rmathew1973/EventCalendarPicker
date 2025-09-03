@@ -1,5 +1,5 @@
 //
-//  DayLabelHeading.swift
+//  SparseDayLabelHeading.swift
 //  EventCalendarPicker
 //
 //  Created by Mathews, Russell on 8/28/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DayLabelHeading: View {
+struct SparseDayLabelHeading: View {
     @EnvironmentObject var dateService: DateService
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 7), spacing: 0) {

@@ -1,5 +1,5 @@
 //
-//  NextPreviousHeading.swift
+//  SparseNextPreviousHeading.swift
 //  EventCalendarPicker
 //
 //  Created by Mathews, Russell on 8/28/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NextPreviousHeading: View {
+struct SparseNextPreviousHeading: View {
     
     @EnvironmentObject var dateService: DateService
     var previousForegroundColor: Color {

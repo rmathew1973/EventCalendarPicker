@@ -1,5 +1,5 @@
 //
-//  EventCalendarControl.swift
+//  SparseEventCalendarControl.swift
 //  RDM Solutions Inc.
 //
 //  Created by Russell Mathews on 6/10/24.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct EventCalendarControl: View {
+struct SparseEventCalendarControl: View {
     @StateObject var dateService: DateService
     @Binding var selectedDate: Date
     
@@ -28,29 +28,29 @@ struct EventCalendarControl: View {
     var body: some View {
         VStack {
             HStack {
-                CalendarHeading()
+                SparseCalendarHeading()
                     .environmentObject(dateService)
                 Spacer()
-                NextPreviousHeading()
+                SparseNextPreviousHeading()
                     .environmentObject(dateService)
             }
             .frame(height: 36)
             if dateService.isPresenting {
                 HStack(alignment: .center) {
-                    PickerView()
+                    SparsePickerView()
                         .environmentObject(dateService)
                 }
             } else {
                 VStack {
-                    DayLabelHeading()
+                    SparseDayLabelHeading()
                         .environmentObject(dateService)
-                    WeekView()
+                    SparseWeekView()
                         .environmentObject(dateService)
                 }
             }
         }
-        .onChange(of: dateService.selectedDate) {
-            selectedDate = $0
+        .onChange(of: dateService.selectedDate) { oldValue, newValue in
+            selectedDate = newValue
         }
     }
 }

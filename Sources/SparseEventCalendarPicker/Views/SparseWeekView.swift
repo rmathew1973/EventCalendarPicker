@@ -1,5 +1,5 @@
 //
-//  WeekView.swift
+//  SparseWeekView.swift
 //  EventCalendarPicker
 //
 //  Created by Mathews, Russell on 8/28/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeekView: View {
+struct SparseWeekView: View {
     @EnvironmentObject var dateService: DateService
     
     var body: some View {
@@ -15,7 +15,7 @@ struct WeekView: View {
             ForEach(dateService.month.weeks) { week in
                 ForEach(Date.longDayLabels, id: \.self) { dayName in
                     if let day = week.days.first(where: { $0.name == dayName }) {
-                        DayItem(day: day)
+                        SparseDayItem(day: day)
                     } else {
                         Color.clear
                             .frame(maxWidth: .infinity)

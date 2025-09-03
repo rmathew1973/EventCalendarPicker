@@ -7,6 +7,11 @@
 		<key>EventCalendarPicker.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>SparseEventCalendarPicker.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 	</dict>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>EventCalendarPickerTests</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>SparseEventCalendarPicker</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>SparseEventCalendarPickerTests</key>
 		<dict>
 			<key>primary</key>
 			<true/>
