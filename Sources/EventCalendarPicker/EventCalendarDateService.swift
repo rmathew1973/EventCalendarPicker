@@ -9,20 +9,20 @@ import Combine
 import Foundation
 import SwiftUICore
 
-class DateService: ObservableObject {
+class EventCalendarDateService: ObservableObject {
     @Published var firstDateOfMonth: Date
-    @Published var month: Month {
+    @Published var month: EventCalendarDateServiceModels.Month {
         didSet {
             self.changeMonth()
         }
     }
-    @Published var year: Year {
+    @Published var year: EventCalendarDateServiceModels.Year {
         didSet {
             self.changeYear()
         }
     }
     @Published var isPresenting: Bool
-    @Published var years: [Year]
+    @Published var years: [EventCalendarDateServiceModels.Year]
     @Published var selectedDate: Date
     var dateChanged: (_ selectedDate: Date) -> Void
     let textColor: Color
@@ -53,7 +53,7 @@ class DateService: ObservableObject {
         self.selectedDate = selectedDate
         self.firstDateOfMonth = selectedDate
         self.isPresenting = false
-        let starYear = Year(name: Date().yearString, months: [Month(name: Date().monthString, weeks: [], dates: dates)])
+        let starYear = EventCalendarDateServiceModels.Year(name: Date().yearString, months: [EventCalendarDateServiceModels.Month(name: Date().monthString, weeks: [], dates: dates)])
         self.years = [starYear]
         self.year = starYear
         self.month = starYear.months.first!
@@ -95,7 +95,7 @@ class DateService: ObservableObject {
         firstDateOfMonth = month.dates.first!
     }
     
-    func createYearModels(from dates: [Date]) -> [Year] {
+    func createYearModels(from dates: [Date]) -> [EventCalendarDateServiceModels.Year] {
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMMM" // Full month name
@@ -110,7 +110,7 @@ class DateService: ObservableObject {
         }
         
         // Create year models, sorted by year (least to greatest)
-        let years: [Year] = yearDict.keys.sorted().map { yearNum in
+        let years: [EventCalendarDateServiceModels.Year] = yearDict.keys.sorted().map { yearNum in
             let yearDates = yearDict[yearNum]!
             
             // Group dates by month
@@ -121,7 +121,7 @@ class DateService: ObservableObject {
             }
             
             // Create month models, sorted by month (least to greatest)
-            let months: [Month] = monthDict.keys.sorted().map { monthNum in
+            let months: [EventCalendarDateServiceModels.Month] = monthDict.keys.sorted().map { monthNum in
                 var monthDates = monthDict[monthNum]!
                 monthDates.sort { $0 < $1 } // Sort dates chronologically
                 
@@ -132,7 +132,7 @@ class DateService: ObservableObject {
                 let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)!
                 
                 // Group days by week of year
-                var weekDict: [Int: [Day]] = [:]
+                var weekDict: [Int: [EventCalendarDateServiceModels.Day]] = [:]
                 var currentDate = startOfMonth
                 while currentDate < endOfMonth {
                     let dayOfMonth = calendar.component(.day, from: currentDate)
@@ -140,7 +140,7 @@ class DateService: ObservableObject {
                     let dayName = dayFormatter.string(from: currentDate)
                     let isInDatesArray = monthDates.contains { calendar.isDate($0, equalTo: currentDate, toGranularity: .day) }
                     
-                    let day = Day(name: dayName, dayOfMonth: dayOfMonth, date: currentDate, isInDatesArray: isInDatesArray)
+                    let day = EventCalendarDateServiceModels.Day(name: dayName, dayOfMonth: dayOfMonth, date: currentDate, isInDatesArray: isInDatesArray)
                     weekDict[weekNum, default: []].append(day)
                     
                     currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
@@ -149,20 +149,70 @@ class DateService: ObservableObject {
                 // Create week models for all weeks in the month, sorted by week number
                 let weekRange = calendar.range(of: .weekOfYear, in: .month, for: startOfMonth)!
                 let weekNumbers = Array(weekRange)
-                let weeks: [Week] = weekNumbers.sorted().map { weekNum in
+                let weeks: [EventCalendarDateServiceModels.Week] = weekNumbers.sorted().map { weekNum in
                     let days = weekDict[weekNum, default: []].sorted { $0.dayOfMonth < $1.dayOfMonth }
-                    return Week(number: weekNum, days: days)
+                    return EventCalendarDateServiceModels.Week(number: weekNum, days: days)
                 }
                 
                 // Get month name from a sample date
                 let monthName = dateFormatter.string(from: sampleDate)
                 
-                return Month(name: monthName, weeks: weeks, dates: monthDates)
+                return EventCalendarDateServiceModels.Month(name: monthName, weeks: weeks, dates: monthDates)
             }
             
-            return Year(name: "\(yearNum)", months: months)
+            return EventCalendarDateServiceModels.Year(name: "\(yearNum)", months: months)
         }
         
         return years
     }
+}
+
+fileprivate extension Date {
+    
+    static let longDayLabels: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    
+    var dayString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d"
+        return dateFormatter.string(from: self)
+    }
+
+    var yearString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: self)
+    }
+    
+    var monthString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LLLL"
+        return dateFormatter.string(from: self)
+    }
+    
+    var shortDayString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        return dateFormatter.string(from: self)
+    }
+    
+    static func firstDateForMonthYear(month: String, year: String) -> Date {
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "d LLLL yyyy"
+        return dateFormater.date(from: "1 \(month) \(year)") ?? Date()
+    }
+    
+    static func lastDateOfMonth(month: String, year: String) -> Date {
+        let firstDayOfMonth = Date.firstDateForMonthYear(month: month, year: year)
+        guard let range = Calendar.current.range(of: .day, in: .month, for: firstDayOfMonth) else {
+            return Date()
+        }
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "d LLLL yyyy"
+        return dateFormater.date(from: "\(range.upperBound) \(month) \(year)") ?? Date()
+    }
+    
+    func startOfMonth() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: Calendar.current.startOfDay(for: self))) ?? Date()
+    }
+    
 }

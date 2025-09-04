@@ -1,5 +1,5 @@
 //
-//  SparseDayItem.swift
+//  DayItem.swift
 //  EventCalendarPicker
 //
 //  Created by Mathews, Russell on 8/29/25.
@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct SparseDayItem: View {
-    @EnvironmentObject var dateService: DateService
-    let day: Day
+struct EventCalendarDayItem: View {
+    @EnvironmentObject var dateService: EventCalendarDateService
+    let day: EventCalendarDateServiceModels.Day
     
     var body: some View {
         if day.isInDatesArray {

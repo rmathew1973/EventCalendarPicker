@@ -1,5 +1,5 @@
 //
-//  SparsePickerView.swift
+//  PickerView.swift
 //  EventCalendarPicker
 //
 //  Created by Mathews, Russell on 8/28/25.
@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct SparsePickerView: View {
-    @EnvironmentObject var dateService: DateService
+struct EventCalendarPickerView: View {
+    @EnvironmentObject var dateService: EventCalendarDateService
     
     var body: some View {
         HStack {

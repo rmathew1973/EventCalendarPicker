@@ -1,5 +1,5 @@
 //
-//  SparseEventCalendarControl.swift
+//  SparseEventCalendar.swift
 //  RDM Solutions Inc.
 //
 //  Created by Russell Mathews on 6/10/24.
@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct SparseEventCalendarControl: View {
-    @StateObject var dateService: DateService
+struct SparseEventCalendar: View {
+    @StateObject var dateService: EventCalendarDateService
     @Binding var selectedDate: Date
     
     init(selectedDate: Binding<Date>, dates: [Date], textColor: Color = .black, selectedColor: Color = .red, selectedTextColor: Color = .white, disabledColor: Color = .gray, dateChanged: @escaping (_: Date) -> Void) {
-        self._dateService = StateObject(wrappedValue: DateService(
+        self._dateService = StateObject(wrappedValue: EventCalendarDateService(
                     dateChanged: dateChanged,
                     dates: dates.sorted(),
                     selectedDate: selectedDate.wrappedValue,
@@ -28,23 +28,23 @@ struct SparseEventCalendarControl: View {
     var body: some View {
         VStack {
             HStack {
-                SparseCalendarHeading()
+                EventCalendarHeading()
                     .environmentObject(dateService)
                 Spacer()
-                SparseNextPreviousHeading()
+                EventCalendarNextPreviousHeading()
                     .environmentObject(dateService)
             }
             .frame(height: 36)
             if dateService.isPresenting {
                 HStack(alignment: .center) {
-                    SparsePickerView()
+                    EventCalendarPickerView()
                         .environmentObject(dateService)
                 }
             } else {
                 VStack {
-                    SparseDayLabelHeading()
+                    EventCalendarDayLabelHeading()
                         .environmentObject(dateService)
-                    SparseWeekView()
+                    EventCalendarWeekView()
                         .environmentObject(dateService)
                 }
             }
