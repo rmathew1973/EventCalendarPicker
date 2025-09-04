@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct EventCalendarDayLabelHeading: View {
-    @EnvironmentObject var dateService: EventCalendarDateService
+struct DayLabelHeading: View {
+    @EnvironmentObject var dateService: DateService
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 7), spacing: 0) {
             ForEach(Date.dayLabels, id: \.self) { item in
@@ -21,8 +21,4 @@ struct EventCalendarDayLabelHeading: View {
             }
         }
     }
-}
-
-fileprivate extension Date {
-    static let dayLabels = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 }

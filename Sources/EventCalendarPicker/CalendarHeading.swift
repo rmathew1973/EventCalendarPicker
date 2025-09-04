@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct EventCalendarHeading: View {
+struct CalendarHeading: View {
     
-    @EnvironmentObject var dateService: EventCalendarDateService
+    @EnvironmentObject var dateService: DateService
     
     var body: some View {
         HStack {

@@ -8,13 +8,13 @@
 import Foundation
 import SwiftUI
 
-struct EventCalendarDayItem: View {
-    @EnvironmentObject var dateService: EventCalendarDateService
-    let day: EventCalendarDateServiceModels.Day
+struct DayItem: View {
+    @EnvironmentObject var dateService: DateService
+    let day: Day
     
     var body: some View {
         if day.isInDatesArray {
-            if dateService.selectedDate == day.date {
+            if dateService.selectedDate.shortDayString == day.date.shortDayString {
                 Button {
                     dateService.selectedDate = day.date
                 } label: {
@@ -59,4 +59,3 @@ struct EventCalendarDayItem: View {
         }
     }
 }
-

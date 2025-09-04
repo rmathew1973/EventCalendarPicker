@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct EventCalendarPickerView: View {
-    @EnvironmentObject var dateService: EventCalendarDateService
+struct PickerView: View {
+    @EnvironmentObject var dateService: DateService
     
     var body: some View {
         HStack {

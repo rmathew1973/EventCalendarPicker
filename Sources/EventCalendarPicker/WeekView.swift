@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct EventCalendarWeekView: View {
-    @EnvironmentObject var dateService: EventCalendarDateService
+struct WeekView: View {
+    @EnvironmentObject var dateService: DateService
     
     var body: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 7), spacing: 0) {
             ForEach(dateService.month.weeks) { week in
                 ForEach(Date.longDayLabels, id: \.self) { dayName in
                     if let day = week.days.first(where: { $0.name == dayName }) {
-                        EventCalendarDayItem(day: day)
+                        DayItem(day: day)
                     } else {
                         Color.clear
                             .frame(maxWidth: .infinity)
@@ -27,6 +27,4 @@ struct EventCalendarWeekView: View {
     }
 }
 
-fileprivate extension Date {
-    static let longDayLabels: [String] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-}
+

@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct EventCalendarNextPreviousHeading: View {
+struct NextPreviousHeading: View {
     
-    @EnvironmentObject var dateService: EventCalendarDateService
+    @EnvironmentObject var dateService: DateService
     var previousForegroundColor: Color {
         if dateService.previousEnabled {
             return dateService.selectedColor
