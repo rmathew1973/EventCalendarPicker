@@ -12,7 +12,7 @@ public struct SparseEventCalendar: View {
     @StateObject var dateService: EventCalendarDateService
     @Binding var selectedDate: Date
     
-    init(selectedDate: Binding<Date>, dates: [Date], textColor: Color = .black, selectedColor: Color = .red, selectedTextColor: Color = .white, disabledColor: Color = .gray, dateChanged: @escaping (_: Date) -> Void) {
+    public init(selectedDate: Binding<Date>, dates: [Date], textColor: Color = .black, selectedColor: Color = .red, selectedTextColor: Color = .white, disabledColor: Color = .gray, dateChanged: @escaping (_: Date) -> Void) {
         self._dateService = StateObject(wrappedValue: EventCalendarDateService(
                     dateChanged: dateChanged,
                     dates: dates.sorted(),
