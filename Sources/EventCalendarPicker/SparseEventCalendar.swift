@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct SparseEventCalendar: View {
+public struct SparseEventCalendar: View {
     @StateObject var dateService: EventCalendarDateService
     @Binding var selectedDate: Date
     
@@ -25,7 +25,7 @@ struct SparseEventCalendar: View {
         _selectedDate = selectedDate
     }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             HStack {
                 EventCalendarHeading()
