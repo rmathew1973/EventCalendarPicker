@@ -7,7 +7,7 @@
 
 import Combine
 import Foundation
-import SwiftUICore
+import SwiftUI
 
 class EventCalendarDateService: ObservableObject {
     @Published var firstDateOfMonth: Date
