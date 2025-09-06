@@ -15,19 +15,15 @@ struct ContentView: View {
   var body: some View {
     VStack {
       EventCalendarPicker(
-        selectedDate: $prenatalService.selectedDate,
-        dates: prenatalService.selectedEventDates,
+        selectedDate: $date,
+        dates: dates,
         textColor: .black,
         selectedColor: .purple,
         selectedTextColor: .white,
         disabledColor: .black ) { newDate in
-          if let selectedEvent = prenatalService.selectedEvents.first(where: { item in
-            item.date.shortDate == newDate.shortDate
-          }) {
-            prenatalService.selectedEvent = selectedEvent
-          }
+          print(newDate)
         }
-        .padding(BrandConstants.defaultPadding.cgFloat)
+        .padding(16)
     }
   }
 }
