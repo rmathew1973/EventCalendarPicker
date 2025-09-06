@@ -9,7 +9,7 @@ To implement it you can add it to a view with the arguments like this
 import SwiftUI
 
 struct ContentView: View {
-  @State date: Date = Date()
+  @State var date: Date = Date()
   let dates: [Date] = [Date()]
 
   var body: some View {
