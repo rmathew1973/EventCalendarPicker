@@ -23,7 +23,11 @@ class DateService: ObservableObject {
     }
     @Published var isPresenting: Bool
     @Published var years: [Year]
-    @Published var selectedDate: Date
+    @Published var selectedDate: Date {
+        didSet {
+            self.dateChanged(selectedDate)
+        }
+    }
     var dateChanged: (_ selectedDate: Date) -> Void
     let textColor: Color
     let selectedColor: Color
