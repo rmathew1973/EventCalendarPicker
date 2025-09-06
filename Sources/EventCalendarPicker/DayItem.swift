@@ -14,7 +14,7 @@ struct DayItem: View {
     
     var body: some View {
         if day.isInDatesArray {
-            if dateService.selectedDate.shortDayString == day.date.shortDayString {
+            if dateService.selectedDate.shortDate == day.date.shortDate {
                 Button {
                     dateService.selectedDate = day.date
                 } label: {

@@ -31,6 +31,10 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    var shortDate: String {
+        return "\(monthString)/\(dayString)/\(yearString)"
+    }
+    
     var shortDayString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE"
