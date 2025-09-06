@@ -18,9 +18,9 @@ struct ContentView: View {
         selectedDate: $prenatalService.selectedDate,
         dates: prenatalService.selectedEventDates,
         textColor: .black,
-        selectedColor: .appPurple,
-        selectedTextColor: .appPureWhite,
-        disabledColor: .appBlack ) { newDate in
+        selectedColor: .purple,
+        selectedTextColor: .white,
+        disabledColor: .black ) { newDate in
           if let selectedEvent = prenatalService.selectedEvents.first(where: { item in
             item.date.shortDate == newDate.shortDate
           }) {
