@@ -54,3 +54,46 @@ public struct EventCalendarPicker: View {
         }
     }
 }
+
+#Preview {
+    @Previewable @State var showCalendar: Bool = true
+    @Previewable @State var date: Date = Date()
+    VStack {
+        VStack {
+            Spacer()
+            VStack {
+                if showCalendar {
+                    HStack {
+                        Spacer()
+                        Button {
+                            showCalendar.toggle()
+                        } label: {
+                            Text("Done")
+                                .foregroundColor(.purple)
+                        }
+                    }
+                    EventCalendarPicker(selectedDate: $date, dates: [Date(), Calendar.current.date(byAdding: .month, value: 1, to: Date())!, Calendar.current.date(byAdding: .year, value: 2, to: Date())!], textColor: .black, selectedColor: .purple, selectedTextColor: .white, disabledColor: .gray) { date in
+                        print(date)
+                    }
+                } else {
+                    HStack {
+                        Spacer()
+                        Button {
+                            showCalendar.toggle()
+                        } label: {
+                            Text("\($date.wrappedValue.monthString),  \($date.wrappedValue.dayString)  \($date.wrappedValue.yearString)")
+                        }
+                        Spacer()
+                    }
+                }
+            }
+            .padding()
+            .background(.white)
+            .cornerRadius(12)
+            Spacer()
+        }
+        .padding()
+    }
+    .background(.gray)
+    .ignoresSafeArea()
+}
